@@ -1,4 +1,4 @@
-SET DEFINE OFF
+SET DEFINE OFF;
 
 CREATE TABLE TEMP
 (
@@ -15497,3 +15497,4 @@ VALUES ('CA-2014-119914', TO_DATE('05/05/2014', 'MM/DD/RRRR'), TO_DATE('05/10/20
         'ChrisCortes@gmail.com', 'United States,Westminster,California', 'Appliances',
         'Acco 7-Outlet Masterpiece Power Center, Wihtout Fax/Phone Line Protection', 243.16, 2.0, 72.948);
 
+COMMIT;
