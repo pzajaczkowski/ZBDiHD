@@ -34,14 +34,14 @@ WHERE VISIT.VISITS_RANKING = VISITORS.VISITS_RANKING
 -- z pominięciem wymiaru czasu. Odpowiednio sformatuj kolumny
 -- dodając etykiety oraz formatowanie kolumn PROFIT i AVERAGE.
 
-SELECT VT.DESCRIPTION                                                                                AS VISIT_TYPE,
-       DECODE(T.YEAR, NULL, 'SUMMARY:', T.YEAR)                                                      AS YEAR,
-       DECODE(T.MONTH, NULL, '-------', T.MONTH)                                                        AS MONTH,
-       TO_CHAR(SUM(V.PROFIT), '$9999.9')                                                             AS PROFIT,
+SELECT VT.DESCRIPTION                                                                                 AS VISIT_TYPE,
+       DECODE(T.YEAR, NULL, 'SUMMARY:', T.YEAR)                                                       AS YEAR,
+       DECODE(T.MONTH, NULL, '-------', T.MONTH)                                                      AS MONTH,
+       TO_CHAR(SUM(V.PROFIT), '$9999.9')                                                              AS PROFIT,
        DECODE(T.MONTH, NULL, '-------', ROUND(AVG(SUM(V.PROFIT))
-                                                 OVER (PARTITION BY VT.DESCRIPTION
-                                                     ORDER BY T.YEAR, T.MONTH
-                                                     ROWS BETWEEN 1 PRECEDING AND 2 FOLLOWING ), 2)) AS AVERAGE
+                                                  OVER (PARTITION BY VT.DESCRIPTION
+                                                      ORDER BY T.YEAR, T.MONTH
+                                                      ROWS BETWEEN 1 PRECEDING AND 2 FOLLOWING ), 2)) AS AVERAGE
 FROM VISIT V
          JOIN VISITTYPE VT ON VT.ID_VISIT_TYPE = V.ID_VISIT_TYPE
          JOIN TIME T ON T.ID_TIME = V.ID_TIME
@@ -56,8 +56,8 @@ ORDER BY VT.DESCRIPTION, T.YEAR, T.MONTH
 SELECT *
 FROM (SELECT DECODE(C.CONTINENT, NULL, 'TOTAL:', C.CONTINENT)                    AS CONTINENT,
              DECODE(UPPER(VT.DESCRIPTION), NULL, 'TOTAL', UPPER(VT.DESCRIPTION)) AS VISIT_TYPE,
-             SUM(V.NUMBER_OF_VISITS)                                             AS SUM_VISITORS,
-             ROUND(AVG(V.NUMBER_OF_VISITS), 2)                                   AS AVG_VISITORS
+             SUM(V.NUMBER_OF_VISITORS)                                           AS SUM_VISITORS,
+             ROUND(AVG(V.NUMBER_OF_VISITORS), 2)                                 AS AVG_VISITORS
       FROM VISIT V
                JOIN CITY C ON C.ID_CITY = V.ID_CITY
                JOIN VISITTYPE VT ON VT.ID_VISIT_TYPE = V.ID_VISIT_TYPE
@@ -104,12 +104,12 @@ GROUP BY YEAR
 -- sformatuj wynik zapytania.
 
 SELECT VC.VISITOR_COUNTRY,
-       DECODE(C.COUNTRY, NULL, '--NO DATA--', C.COUNTRY)                                                          AS COUNTRY_TO_VISIT,
+       DECODE(C.COUNTRY, NULL, '--NO DATA--', C.COUNTRY) AS COUNTRY_TO_VISIT,
        DECODE(SUM(V.NUMBER_OF_VISITORS), NULL, 0,
-              SUM(V.NUMBER_OF_VISITORS))                                                                          AS VISITORS,
+              SUM(V.NUMBER_OF_VISITORS))                 AS VISITORS,
        TO_CHAR(DECODE(C.COUNTRY, NULL, 0, RATIO_TO_REPORT(SUM(V.NUMBER_OF_VISITORS))
                                                           OVER (PARTITION BY VC.VISITOR_COUNTRY) * 100),
-               '990.9')                                                                                           AS PERCENTAGE
+               '990.9')                                  AS PERCENTAGE
 FROM VISITORCOUNTRY VC
          LEFT JOIN VISIT V ON VC.ID_COUNTRY = V.ID_COUNTRY
          LEFT JOIN CITY C ON C.ID_CITY = V.ID_CITY
