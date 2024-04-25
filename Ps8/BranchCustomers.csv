@@ -1,0 +1,12 @@
+cusnum,cusfname,cuslname,cusmiddle,cusemail,cusphone,cusadd1,cusadd2,cuscity,cusstate,cuszip,cusfirstorder,cusrecentorder,cuszone,cusannualsales,currentbalance
+A01,Jim,Semp,A,jsemp@mail.com,123-654-2344,123 Main Street,Suite 23,Pittsburgh,PA,15217-2233,3/1/2009,5/1/2018,North,10000,200
+A03,Laura,Vail,,laura.vail@hotmail.com,756-345-6789,23 Oak Lane,,Morgantown,WV,26501,11/9/2008,6/1/2016,North,5000,314
+A05,Al's Bakery,,,al@alsbakery.com,213-543-2342,846 Fifth Ave,,Pittsburgh,PA,15219-1222,1/15/2007,8/12/2011,Central,15000,0
+A07,Janet,Wendell,R,jwen@yahoo.com,434-786-3453,23212 Fern Circle,Apt 100,Washington,DC,20001,5/9/2010,11/24/2014,West,12500,798
+A09,Alicia,Albert,,aalbert@gmail.com,234-678-9234,432 Forbes Ave,,Pittsburgh,PA,15229,3/2/2006,6/3/2014,South,500,125
+A11,Henry,Kobb,,hank@kobbfam.net,234-098-7464,10 Dairy Way,2nd Floor,Pittsburgh,PA,15229-8821,8/21/2004,3/5/2013,East,1300,57
+A13,Corner Market,,,manager@cornermarket.com,222-837-6455,1500 Bruster Way,,Ross ,PA,15237,6/14/2010,6/2/2018,Central,13750,341
+A15,Paul,Tolby,E,pt23@school.edu,995-234-5656,230 Route 12,,Ross ,PA,15237,4/3/2001,7/13/2018,East,2500,75
+A17,Olive,Pless,,opless@pctech.com,234-765-2233,15 Horse Alley,,Oakland ,PA,15213-8260,10/12/2000,9/16/2017,West,7500,213
+A19,Remmy,Walker,L,walk.r@aol.com,969-234-8367,100 Silver Hwy,,Oakland ,PA,15213,6/1/2012,8/1/2017,South,20000,0
+A21,71Cafe,,,71Csqhill@pgh.org,412-098-8984,3322 Forbes Ave,,Pittsburgh ,PA,15434,7/22/2012,11/11/2018,East,22000,550

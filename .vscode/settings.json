@@ -1,0 +1,20 @@
+{
+  "python.languageServer": "Pylance",
+  "python.analysis.exclude": [
+    ".vscode/",
+    "venv/",
+    ".gitignore",
+    "**.pdf",
+    ".idea/",
+    "**.csv",
+    "**.sql",
+    "**.sh"
+  ],
+  "files.watcherExclude": {
+    "**/venv/**": true,
+    "**/lista0/**": true,
+    "**/.idea/**": true
+  },
+  "python.analysis.autoSearchPaths": false,
+  "python.analysis.enablePytestSupport": false
+}

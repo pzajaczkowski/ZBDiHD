@@ -1,0 +1,9 @@
+ID,Name,Address,city,state,zip,ContactPref,Contact,DOB
+C1       , jill franks,111 Lake Dr,Pgh,Pa,15212,email,jf773@hotmail.com,8/15/1995
+C2         ,sal yates,57 College Way,Morgantown,WV,26501,phone,724-234-6542,6/4/1983
+C3       ,will ratliff,544 Fifth Ave,Pgh,Pa,15219,email,ratty@mail.com,10/15/1991
+C4       , fran vicks ,10332 West Street,McCandless,PA,15234,phone          ,904-123-8337,3/8/1984
+C5            ,billy murray,2333 N Bellefield,Pgh,PA,15213,email,bmbm@pitt.edu,3/3/1990
+C6                        ,olive pless,"6767 W 54th Street, Apt B",,,,email          ,opless@newpc.com,12/15/1964
+C7     ,kline's,500 West South Street,Pgh,PA,15219,email,klines2@klines.com,7/13/1995
+
