@@ -1,0 +1,78 @@
+use IMDB
+
+// zad 5
+db.Title.find().skip(29).limit(1)
+
+// zad 6
+db.Title.find().limit(100).sort({startYear:1}) // -1 malejąco
+
+// zad 7
+db.Title.find(
+    {startYear:1994, genres:"Drama", runtimeMinutes:{$gt:100}},
+    {primaryTitle:1, startYear:1, runtimeMinutes:1, genres:1, _id:0}
+).limit(10)
+
+//zad 8
+db.Title.find(
+    {startYear:2000, genres:{$regex:"Animation"}, runtimeMinutes:{$lte:10}},
+    {primaryTitle:1, startYear:1, runtimeMinutes:1, genres:1, _id:0}
+).limit(10)
+
+//zad 9
+db.Title.find(
+    {$or:[
+        {startYear:2000},
+        {genres:{$regex:"Animation"}},
+        {runtimeMinutes:{$lte:10}}
+    ]},
+    {primaryTitle:1, startYear:1, runtimeMinutes:1, genres:1, _id:0}
+).limit(10)
+
+//zad 11
+db.Title.aggregate(
+    {$match:{startYear:1942, primaryTitle:"Casablanca"}},
+    {$lookup:{
+        from:"Rating",
+        localField:"tconst",
+        foreignField:"tconst",
+        as:"joinRating"
+        }
+    },
+    {$project:{
+        primaryTitle:1, startYear:1, 'joinRating.averageRating':1, _id:0
+        }
+    }
+)
+
+//zad 12
+db.Title.find({titleType:"movie", startYear:{$in:[2017,2018,2019]}}).count()
+
+//zad 13
+db.Rating.createIndex({averageRating:-1})
+db.Rating.getIndexes()
+
+//zad 14
+db.Title.updateMany(
+    {primaryTitle:"Forrest Gump", startYear:1994},
+    {$set: {ratings:
+        [{date: new Date(), value: 8},
+        {date: new Date(), value:10}]
+    }}
+)
+
+//zad 15
+db.Title.updateOne(
+    {primaryTitle:"Forrest Gump", startYear: 1994},
+    {$push: 
+        {ratings:
+            { $each:
+                [ {date: new Date(), value:9.5}, 
+                {date: new Date(), value: 7}],
+                $sort:{value:-1},
+                $slice:3 
+            }
+        }
+});
+
+//zad 16
+db.Title.find({primaryTitle:"Forrest Gump", startYear:1994, 'ratings[0].value':10})
