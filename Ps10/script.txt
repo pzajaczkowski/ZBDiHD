@@ -1,0 +1,59 @@
+-zad1
+db.Title.insert()
+db.Title.insertOne()
+db.Title.insertMany()
+
+db.Title.insertOne({title:'Io', year:2022, director:'Jerzy Skolimkowski'})
+db.Title.insertMany([{title:'Elvis', year:2022, director:'Baz Luhman'}, {title:"Na zachodzie bez zmian", year:2022, director:'ktos'}])
+
+--zad2
+db.Title.remove()
+db.Title.deleteOne({year:2022})
+db.Title.deleteMany({year:2022})
+
+--zad 3
+db.Title.updateOne()
+db.Title.updateMany({where},{set})
+
+db.Title.updateMany({titleType:"movie", startYear:2020},{$set: {category:[]}}) // dodanie nowego pola
+
+--zad 4
+db.Title.updateMany({titleType:"movie", startYear:2020, genres: {$regex:"Comedy"}},{$push: {category:"Comedy"}})
+db.Title.updateMany({titleType:"movie", startYear:2020, genres: {$regex:"Drama"}},{$push: {category:"Drama"}})
+db.Title.updateMany({titleType:"movie", startYear:2020, genres: {$regex:"Romance"}},{$push: {category:"Romance"}})
+
+db.Title.find({titleType:"movie", startYear:2020}).limit(10)
+
+$unset:{category:""}
+db.Title.updateMany({titleType:"movie", startYear:2020},{$unset:{category:""}})
+--zad 5
+db.Title.aggregate(
+{$match:{startYear:{$in:[2017,2018,2019]}, titleType:"movie"}},
+{$group:{_id:"$startYear", total:{$sum:1}}})
+
+--zad 6 having
+db.Title.aggregate(
+{$match:{startYear:{$in:[2017,2018,2019]}, titleType:"movie"}},
+{$group:{_id:"$startYear", total:{$sum:1}}},
+{$match:{total:{$gt:14000}}},
+{$sort:{total:1}})
+
+--zad 7
+
+db.Title.aggregate({$match:{startYear:2020, titleType:"movie"}},{$unwind:"$category"},{$group:{_id:"$category", total:{$sum:1}}})
+
+
+--zad 12
+db.Title.createIndex({genres:"text"})
+db.Title.find({titleType:"movie", $text:{$search:"comedy romance"}}, {_id:0, genres:1, primaryTitle:1}).limit(20).sort({startYear:1})
+
+--zad 13
+db.Title.find({titleType:"movie", $text:{$search:"Comedy romance", $caseSensitive:true}}, {_id:0, genres:1, primaryTitle:1}).limit(20).sort({primaryTitle:1})
+
+--zad 14
+//diacriticSensitive:false , $language:"en"
+db.Title.dropIndex("genres_text")
+db.Title.getIndexes()
+db.Title.createIndex({originalTitle:"text"})
+
+db.Title.find({titleType:"movie", $text:{$search: "Café", $caseSensitive:true, $diacriticSensitive:true, $language:"en"}}, {_id:0, genres:1, originalTitle:1}).limit(20)
